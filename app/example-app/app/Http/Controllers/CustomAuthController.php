@@ -38,6 +38,7 @@ class CustomAuthController extends Controller
     public function customRegistration(Request $request)
     {
         $request->validate([
+            'phone' => 'required|min:10',
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
@@ -52,6 +53,7 @@ class CustomAuthController extends Controller
     public function create(array $data)
     {
         return User::create([
+            'phone' => $data['phone'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
