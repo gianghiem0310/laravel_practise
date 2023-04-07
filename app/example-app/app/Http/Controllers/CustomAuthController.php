@@ -38,10 +38,10 @@ class CustomAuthController extends Controller
     public function customRegistration(Request $request)
     {
         $request->validate([
-            'phone' => 'required|min:10',
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            // 'phone' => 'required|min:10',
+            // 'name' => 'required',
+            // 'email' => 'required|email|unique:users',
+            // 'password' => 'required|min:6',
         ]);
 
         $data = $request->all();
@@ -56,7 +56,8 @@ class CustomAuthController extends Controller
             'phone' => $data['phone'],
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'confirmpassword' => $data['confirmpassword'],
         ]);
     }
 
