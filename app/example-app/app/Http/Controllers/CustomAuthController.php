@@ -43,10 +43,15 @@ class CustomAuthController extends Controller
             // 'email' => 'required|email|unique:users',
             // 'password' => 'required|min:6',
         ]);
+        $image = $request->file('image');
+        $storedPath = $image->move('images', $image->getClientOriginalName());
 
+        
         $data = $request->all();
+        $data['image']=$storedPath;
+       
         $check = $this->create($data);
-
+        
         return redirect("dashboard")->withSuccess('You have signed-in');
     }
 
@@ -56,6 +61,7 @@ class CustomAuthController extends Controller
             'phone' => $data['phone'],
             'name' => $data['name'],
             'email' => $data['email'],
+            'image' => $data['image'],
             'password' => Hash::make($data['password']),
             'confirmpassword' => $data['confirmpassword'],
         ]);
